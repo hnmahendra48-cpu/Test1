@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weekly Tasks & Calendar</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <h1>Weekly Tasks & Calendar</h1>
+    <nav class="view-switcher" aria-label="View switcher">
+      <button id="btn-view-week" class="tab-button active" aria-pressed="true">Week</button>
+      <button id="btn-view-calendar" class="tab-button" aria-pressed="false">Calendar</button>
+    </nav>
+  </header>
+
+  <main class="app-main">
+    <section class="add-task" aria-labelledby="add-task-heading">
+      <h2 id="add-task-heading">Add task</h2>
+      <form id="add-task-form" autocomplete="off">
+        <label class="sr-only" for="task-text">Task</label>
+        <input id="task-text" type="text" placeholder="Task description" required>
+
+        <label class="sr-only" for="task-day">Day</label>
+        <select id="task-day">
+          <option value="auto" selected>Auto from date</option>
+          <option value="1">Monday</option>
+          <option value="2">Tuesday</option>
+          <option value="3">Wednesday</option>
+          <option value="4">Thursday</option>
+          <option value="5">Friday</option>
+          <option value="6">Saturday</option>
+          <option value="7">Sunday</option>
+        </select>
+
+        <label class="sr-only" for="task-date">Date</label>
+        <input id="task-date" type="date" placeholder="Date (optional)">
+
+        <label class="sr-only" for="task-priority">Priority</label>
+        <select id="task-priority">
+          <option value="normal" selected>Priority: Normal</option>
+          <option value="low">Priority: Low</option>
+          <option value="high">Priority: High</option>
+        </select>
+
+        <button id="btn-add-task" type="submit">Add</button>
+      </form>
+    </section>
+
+    <section id="week-view" class="week-view" aria-labelledby="week-view-heading">
+      <h2 id="week-view-heading" class="sr-only">Week view</h2>
+      <div class="week-grid">
+        <div class="day-column" data-dow="1">
+          <div class="day-header">Monday</div>
+          <ul id="day-1-list" class="task-list" aria-label="Monday tasks"></ul>
+        </div>
+        <div class="day-column" data-dow="2">
+          <div class="day-header">Tuesday</div>
+          <ul id="day-2-list" class="task-list" aria-label="Tuesday tasks"></ul>
+        </div>
+        <div class="day-column" data-dow="3">
+          <div class="day-header">Wednesday</div>
+          <ul id="day-3-list" class="task-list" aria-label="Wednesday tasks"></ul>
+        </div>
+        <div class="day-column" data-dow="4">
+          <div class="day-header">Thursday</div>
+          <ul id="day-4-list" class="task-list" aria-label="Thursday tasks"></ul>
+        </div>
+        <div class="day-column" data-dow="5">
+          <div class="day-header">Friday</div>
+          <ul id="day-5-list" class="task-list" aria-label="Friday tasks"></ul>
+        </div>
+        <div class="day-column" data-dow="6">
+          <div class="day-header">Saturday</div>
+          <ul id="day-6-list" class="task-list" aria-label="Saturday tasks"></ul>
+        </div>
+        <div class="day-column" data-dow="7">
+          <div class="day-header">Sunday</div>
+          <ul id="day-7-list" class="task-list" aria-label="Sunday tasks"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="calendar-view" class="calendar-view hidden" aria-labelledby="calendar-view-heading">
+      <h2 id="calendar-view-heading" class="sr-only">Calendar view</h2>
+      <div class="calendar-header">
+        <button id="btn-prev-month" aria-label="Previous month">⟨</button>
+        <div id="calendar-month-label" class="month-label">Month YYYY</div>
+        <button id="btn-next-month" aria-label="Next month">⟩</button>
+      </div>
+      <div class="calendar-grid" id="calendar-grid" aria-label="Monthly calendar"></div>
+
+      <div id="selected-date-panel" class="selected-date-panel hidden" aria-live="polite">
+        <div class="panel-header">
+          <div>
+            <div id="selected-date-title" class="panel-title">Date</div>
+            <div id="selected-date-subtitle" class="panel-subtitle">Tasks on this day</div>
+          </div>
+          <button id="btn-close-panel" class="icon-button" aria-label="Close">✕</button>
+        </div>
+        <form id="add-date-task-form" class="panel-add-form">
+          <input id="date-task-text" type="text" placeholder="New task for this date" required>
+          <select id="date-task-priority">
+            <option value="normal" selected>Normal</option>
+            <option value="low">Low</option>
+            <option value="high">High</option>
+          </select>
+          <button type="submit">Add</button>
+        </form>
+        <ul id="selected-date-task-list" class="task-list"></ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <span>Local first. Your tasks are saved in your browser.</span>
+  </footer>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>
